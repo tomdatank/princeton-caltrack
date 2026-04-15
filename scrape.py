@@ -6,6 +6,7 @@ parses nutrition data, and writes data/menu.json.
 Run manually or via GitHub Actions daily.
 """
 
+import os
 import json
 import re
 import sys
@@ -49,7 +50,7 @@ def build_url(location_num: str, location_name: str, dt: date) -> str:
         "sName": "Princeton University Campus Dining",
         "locationNum": location_num,
         "locationName": location_name,
-        "dtdate": dt.strftime("%-m/%-d/%Y"),  # e.g. 4/15/2026
+        "dtdate": f"{dt.month}/{dt.day}/{dt.year}",
         "naFlag": "1",
         "myaction": "read",
     }
@@ -208,6 +209,8 @@ def main():
     }
 
     out_path = "data/menu.json"
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    
     with open(out_path, "w") as f:
         json.dump(output, f, indent=2)
 
