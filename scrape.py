@@ -126,31 +126,43 @@ def parse_menu_page(html: str, hall_name: str, dt: date) -> list[dict]:
     soup = BeautifulSoup(html, "html.parser")
     items = []
 
-    # Current meal section and station, tracked as we walk the DOM
     current_meal = None
     current_station = None
 
     # Walk all relevant tags in document order
     for tag in soup.find_all(["h2", "h3", "h4", "h5", "strong", "p", "div", "section"]):
-
-        # Meal headers appear as bold text inside certain containers
-        # e.g. "Breakfast", "Lunch", "Dinner" appear as <strong> or in specific classes
         tag_text = tag.get_text(strip=True)
+        if not tag_text:
+            continue
 
-        # Detect meal period headers (they appear as bold standalone lines)
-        if tag.name in ("strong", "b") and tag_text in ("Breakfast", "Lunch", "Dinner"):
+        # 1. Detect Meal Headers (Updated for Bootstrap card-headers)
+        if tag.name == "div" and tag.get("class") and "card-header" in tag.get("class"):
+            # Ensure we only grab valid meal names
+            current_meal = None
+            if tag_text in ("BreakfastNutrition", "LunchNutrition", "DinnerNutrition", "Continental BreakfastNutrition"):
+                current_meal = tag_text.replace("Nutrition", "")
+            else:
+                print(tag_text + " unexpected")
+            continue
+            
+        # Fallback for old formatting just in case they revert
+        if tag.name in ("strong", "b") and tag_text in ("Breakfast", "Lunch", "Dinner", "Brunch"):
             current_meal = tag_text
             current_station = None
             continue
 
-        # Station sub-headers appear as plain text paragraphs or small headings
-        # e.g. "At the grill", "Main Entree", "Salads"
-        if tag.name in ("h4", "h5") and tag_text and len(tag_text) < 60:
+        # 2. Detect Station Sub-headers
+        if tag.name in ("h3", "h4", "h5") and len(tag_text) < 60:
+            # Ignore UI buttons that get caught in heading tags
+            if "Allergen" in tag_text or "Filter" in tag_text:
+                continue
+            
+            # If it's a valid, short heading, it's our new station
             current_station = tag_text
             continue
 
-        # Food item names appear as <h2> tags
-        if tag.name == "h2" and tag_text:
+        # 3. Detect Food Item Names
+        if tag.name == "h2":
             item_name = tag_text
 
             # The nutrition block immediately follows the h2 in the DOM
@@ -169,7 +181,6 @@ def parse_menu_page(html: str, hall_name: str, dt: date) -> list[dict]:
             })
 
     return items
-
 
 def scrape_hall_day(hall: dict, dt: date) -> list[dict]:
     url = build_url(hall["num"], hall["name"], dt)

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Princeton Meal Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans p-6">
+
+    <div class="max-w-4xl mx-auto space-y-8 relative">
+
+        <header class="text-center">
+            <h1 class="text-4xl font-bold text-orange-600">Princeton Meal Planner</h1>
+            <p class="text-gray-600 mt-2">Optimize your dining hall macros.</p>
+        </header>
+
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h2 class="text-2xl font-semibold">1. Macro Targets</h2>
+                <button id="open-dietary-btn"
+                    class="text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-3 rounded transition">
+                    ⚙️ Dietary Settings
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium">Daily Calories Target</label>
+                        <input type="number" id="target-calories" placeholder="e.g., 2500"
+                            class="mt-1 block w-full border border-gray-300 rounded p-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium">Daily Protein Target (g)</label>
+                        <input type="number" id="target-protein" placeholder="e.g., 150"
+                            class="mt-1 block w-full border border-gray-300 rounded p-2">
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded border border-gray-200">
+                    <label class="block text-sm font-bold mb-2">Meal Distribution (%)</label>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Breakfast</span>
+                            <input type="number" id="split-breakfast" value="25"
+                                class="w-20 border border-gray-300 rounded p-1 text-center">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Lunch</span>
+                            <input type="number" id="split-lunch" value="35"
+                                class="w-20 border border-gray-300 rounded p-1 text-center">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Dinner</span>
+                            <input type="number" id="split-dinner" value="40"
+                                class="w-20 border border-gray-300 rounded p-1 text-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="save-profile"
+                class="w-full bg-blue-600 text-white rounded p-3 font-bold hover:bg-blue-700 transition">Save
+                Profile</button>
+            <p id="save-status" class="text-sm text-green-600 mt-2 text-center hidden">Profile saved successfully!</p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">2. Today's Itinerary</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium">Breakfast Hall</label>
+                    <select id="hall-breakfast" class="mt-1 block w-full border border-gray-300 rounded p-2">
+                        <option value="Skip">Skip Breakfast</option>
+                        <option value="Rockefeller & Mathey">Rockefeller & Mathey</option>
+                        <option value="Forbes College">Forbes College</option>
+                        <option value="Graduate College">Graduate College</option>
+                        <option value="Whitman & Butler">Whitman & Butler</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Lunch Hall</label>
+                    <select id="hall-lunch" class="mt-1 block w-full border border-gray-300 rounded p-2">
+                        <option value="Whitman & Butler">Whitman & Butler</option>
+                        <option value="Yeh & New College West">Yeh & New College West</option>
+                        <option value="Center for Jewish Life">Center for Jewish Life</option>
+                        <option value="Rockefeller & Mathey">Rockefeller & Mathey</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Dinner Hall</label>
+                    <select id="hall-dinner" class="mt-1 block w-full border border-gray-300 rounded p-2">
+                        <option value="Forbes College">Forbes College</option>
+                        <option value="Whitman & Butler">Whitman & Butler</option>
+                        <option value="Yeh & New College West">Yeh & New College West</option>
+                        <option value="Graduate College">Graduate College</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md border-l-4 border-orange-500">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h2 class="text-2xl font-semibold">3. Your Meal Plan</h2>
+                <button id="generate-plan"
+                    class="bg-green-600 text-white rounded px-6 py-2 font-bold hover:bg-green-700 transition">Generate
+                    Plan</button>
+            </div>
+
+            <div id="recommendation-output"
+                class="text-gray-600 italic bg-gray-50 p-4 rounded border border-gray-200 min-h-[100px]">
+                Click "Generate Plan" to build your meals...
+            </div>
+        </section>
+
+    </div>
+
+    <div id="dietary-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex justify-center items-center">
+        <div class="bg-white w-full max-w-2xl rounded-lg shadow-xl p-6 relative max-h-[90vh] overflow-y-auto">
+
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2">Dietary Settings</h2>
+
+            <div class="mb-6 bg-orange-50 border border-orange-200 p-4 rounded-lg">
+                <label class="block text-sm font-bold text-gray-800 mb-1">Global Enforcement Mode:</label>
+                <p class="text-xs text-gray-600 mb-3">How should the planner handle your checked restrictions below?</p>
+                <select id="global-diet-strictness"
+                    class="w-full border border-gray-300 rounded p-2 text-sm bg-white font-medium">
+                    <option value="strict">Strict (Never suggest non-compliant items)</option>
+                    <option value="flexible">Flexible (Prioritize these, but suggest alternatives if macros are better)
+                    </option>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold text-red-600 mb-3">Allergies</h3>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <label class="flex items-center"><input type="checkbox" id="alg-milk" class="mr-2"> Milk /
+                            Dairy</label>
+                        <label class="flex items-center"><input type="checkbox" id="alg-eggs" class="mr-2"> Eggs</label>
+                        <label class="flex items-center"><input type="checkbox" id="alg-peanuts" class="mr-2">
+                            Peanuts</label>
+                        <label class="flex items-center"><input type="checkbox" id="alg-treenut" class="mr-2"> Tree
+                            Nut</label>
+                        <label class="flex items-center"><input type="checkbox" id="alg-fish" class="mr-2"> Fish</label>
+                        <label class="flex items-center"><input type="checkbox" id="alg-shellfish" class="mr-2">
+                            Shellfish</label>
+                        <label class="flex items-center"><input type="checkbox" id="alg-soy" class="mr-2"> Soy</label>
+                        <label class="flex items-center"><input type="checkbox" id="alg-wheat" class="mr-2">
+                            Wheat</label>
+                        <label class="flex items-center"><input type="checkbox" id="alg-sesame" class="mr-2">
+                            Sesame</label>
+                        <label class="flex items-center"><input type="checkbox" id="alg-gluten" class="mr-2">
+                            Gluten</label>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-purple-600 mb-3">Religious</h3>
+                    <div class="flex space-x-6 text-sm mb-6">
+                        <label class="flex items-center"><input type="checkbox" id="rel-halal" class="mr-2"> Halal
+                            Only</label>
+                        <label class="flex items-center"><input type="checkbox" id="rel-kosher" class="mr-2"> Kosher
+                            Only</label>
+                    </div>
+
+                    <h3 class="text-lg font-bold text-blue-600 mb-3">Lifestyle Diets</h3>
+                    <div class="space-y-3 text-sm">
+                        <label class="flex items-center"><input type="checkbox" id="diet-veg" class="mr-2">
+                            Vegetarian</label>
+                        <label class="flex items-center"><input type="checkbox" id="diet-vegan" class="mr-2">
+                            Vegan</label>
+                        <label class="flex items-center"><input type="checkbox" id="diet-nopork" class="mr-2"> No
+                            Pork</label>
+                        <label class="flex items-center"><input type="checkbox" id="diet-nobeef" class="mr-2"> No Red
+                            Meat</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-end">
+                <button id="close-modal-btn"
+                    class="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700 transition">
+                    Done
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Simple logic to handle the Modal opening and closing
+        const modal = document.getElementById('dietary-modal');
+        const openBtn = document.getElementById('open-dietary-btn');
+        const closeBtn = document.getElementById('close-modal-btn');
+
+        openBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        // Close modal if user clicks the black background outside the box
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+
+        console.log("App skeleton and modal loaded.");
+    </script>
+</body>
+
+</html>
