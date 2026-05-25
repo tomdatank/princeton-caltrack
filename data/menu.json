@@ -1,6 +1,6 @@
 {
-  "scraped_at": "2026-05-24",
-  "item_count": 10,
+  "scraped_at": "2026-05-25",
+  "item_count": 15,
   "items": [
     {
       "hall": "Yeh & New College West",
@@ -229,6 +229,120 @@
         "Gluten"
       ],
       "ingredients": "Watermelon, Greek Yogurt, Pineapple, Cantaloupe, Honeydew, Housemade Granola (Oatmeal (manufacturer does not claim product is gluten free due to possible cross contamination with wheat products during production), Canola Oil, Agave, Pumpkin Seeds, Light Brown Sugar, Vanilla Extract (Vanilla bean extract in water and alcohol), Kosher Salt, Ground Cinnamon), Chocolate Chips, Shredded Coconut, Sliced Peaches, Mango, Sliced Strawberries, Blueberries, Mandarin Oranges"
+    },
+    {
+      "hall": "Yeh & New College West",
+      "date": "2026-05-31",
+      "meal": "Dinner",
+      "station": "Set allergen filters",
+      "name": "Basil Balsamic Roast Chicken",
+      "serving_size": "1 each",
+      "calories": 324.0,
+      "total_fat_g": 15.5,
+      "saturated_fat_g": 4.2,
+      "trans_fat_g": 0.1,
+      "cholesterol_mg": 216.1,
+      "sodium_mg": 461.6,
+      "carbs_g": 1.9,
+      "fiber_g": 0.2,
+      "sugars_g": 0.5,
+      "protein_g": 41.3,
+      "allergens": [
+        "Ingredients include alcohol"
+      ],
+      "ingredients": "Halal Chicken Leg Quarter, Balsamic Vinegar, Dijon Mustard (Water, vinegar, mustard seed, salt, white wine, fruit pectin, citric  acid, tartaric acid, sugar, spice.), Garlic, Kosher Salt, Black Pepper"
+    },
+    {
+      "hall": "Yeh & New College West",
+      "date": "2026-05-31",
+      "meal": "Dinner",
+      "station": "Set allergen filters",
+      "name": "Eggplant Parmesan",
+      "serving_size": "8 oz",
+      "calories": 229.0,
+      "total_fat_g": 12.4,
+      "saturated_fat_g": 4.2,
+      "trans_fat_g": 0.0,
+      "cholesterol_mg": 21.9,
+      "sodium_mg": 556.8,
+      "carbs_g": 21.4,
+      "fiber_g": 3.0,
+      "sugars_g": 4.9,
+      "protein_g": 10.7,
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soybeans",
+        "Gluten"
+      ],
+      "ingredients": "Eggplant Cutlet, Marinara Sauce (Diced Tomatoes, Crushed Tomatoes, Spanish Onions, Water, Fresh Basil, Garlic, Olive Oil & Canola Oil Blend, Kosher Salt, Oregano), Mozzarella Cheese, Romano Cheese"
+    },
+    {
+      "hall": "Yeh & New College West",
+      "date": "2026-05-31",
+      "meal": "Dinner",
+      "station": "Set allergen filters",
+      "name": "Farro Pilaf",
+      "serving_size": "4 oz",
+      "calories": 227.0,
+      "total_fat_g": 5.7,
+      "saturated_fat_g": 0.7,
+      "trans_fat_g": 0.0,
+      "cholesterol_mg": 0.0,
+      "sodium_mg": 33.7,
+      "carbs_g": 35.3,
+      "fiber_g": 4.3,
+      "sugars_g": 2.1,
+      "protein_g": 7.7,
+      "allergens": [
+        "Wheat",
+        "Gluten"
+      ],
+      "ingredients": "Farro, Asparagus, Red Peppers, Corn, Onions, Lemon Juice, Extra Virgin Olive Oil, Canola Oil, Fresh Dill, Flat Leaf Parsley"
+    },
+    {
+      "hall": "Yeh & New College West",
+      "date": "2026-05-31",
+      "meal": "Dinner",
+      "station": "Set allergen filters",
+      "name": "Penne Pasta Marinara",
+      "serving_size": "4 oz",
+      "calories": 161.0,
+      "total_fat_g": 1.0,
+      "saturated_fat_g": 0.0,
+      "trans_fat_g": 0.0,
+      "cholesterol_mg": 0.0,
+      "sodium_mg": 127.1,
+      "carbs_g": 31.1,
+      "fiber_g": 1.8,
+      "sugars_g": 2.1,
+      "protein_g": 5.5,
+      "allergens": [
+        "Wheat",
+        "Gluten"
+      ],
+      "ingredients": "Penne Pasta, Marinara Sauce (Diced Tomatoes, Crushed Tomatoes, Spanish Onions, Water, Fresh Basil, Garlic, Olive Oil & Canola Oil Blend, Kosher Salt, Oregano)"
+    },
+    {
+      "hall": "Yeh & New College West",
+      "date": "2026-05-31",
+      "meal": "Dinner",
+      "station": "Set allergen filters",
+      "name": "Zucchini Provencal",
+      "serving_size": "4 oz",
+      "calories": 108.0,
+      "total_fat_g": 6.5,
+      "saturated_fat_g": 1.0,
+      "trans_fat_g": 0.0,
+      "cholesterol_mg": 0.0,
+      "sodium_mg": 501.2,
+      "carbs_g": 11.0,
+      "fiber_g": 3.2,
+      "sugars_g": 6.8,
+      "protein_g": 4.2,
+      "allergens": [],
+      "ingredients": "Zucchini, Tomatoes, Sliced Mushrooms, Capers, Extra Virgin Olive Oil, Garlic, Oregano, Fresh Basil, Kosher Salt, Black Pepper\nOpen Nutrition Label"
     }
   ]
 }
